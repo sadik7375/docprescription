@@ -21,6 +21,10 @@ class CheckIfInstalled
         if (!$isInstalled) {
             config(['session.driver' => 'file']);
 
+            if (empty(config('app.key'))) {
+                config(['app.key' => 'base64:u3G8p2aZ4KzJ7tYwX1vB6mC9nF5eH8sQ3dE6wR8tY0U=']);
+            }
+
             if (!$request->is('install*') && !$request->is('build*') && !$request->is('up') && !$request->is('favicon.ico')) {
                 return redirect()->route('installer.welcome');
             }
